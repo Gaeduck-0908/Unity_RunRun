@@ -13,16 +13,24 @@ public class Move : MonoBehaviour
     bool isGround = false; //땅 닿아있는 체크 여부
 
     Rigidbody2D rigid;
-    Animator anim;
     SpriteRenderer spr;
 
     private void Start() //가장먼저 실행
     {
         rigid = GetComponent<Rigidbody2D>(); //Rigidbody2d를 불러옴
-        anim = GetComponent<Animator>(); //애니메이션
         spr = GetComponent<SpriteRenderer>();
         pos = this.gameObject.transform.position;
         Debug.Log("현재위치:" + pos);
+        GameManager.Instance.babynum = 0; //todo 데이터저장
+
+        if(SceneManager.GetActiveScene().name == "2.Game") //level1 난이도일시
+        {
+            GameManager.Instance.Level1.transform.GetChild(GameManager.Instance.babynum).gameObject.SetActive(true); //현재레벨 장애물 활성화
+            GameManager.Instance.babynumlength = GameManager.Instance.Level1.transform.childCount; //레벨의 갯수 체크
+        }
+
+        Debug.Log("레벨의갯수:" + GameManager.Instance.babynumlength);
+        Debug.Log("현재레벨:" + GameManager.Instance.babynum);
     }
 
     private void OnCollisionEnter2D(Collision2D col) //오브젝트 접촉시
@@ -36,7 +44,7 @@ public class Move : MonoBehaviour
                 break;
             case "obstacle":
                 {
-                    SceneManager.LoadScene("2.Game"); //죽음
+                    transform.position = pos; //죽음
                     Debug.Log("죽으심");
                 }
                 break;
@@ -53,6 +61,23 @@ public class Move : MonoBehaviour
                     {
                         Debug.Log("골인!");
                         transform.position = pos;
+
+                        if(GameManager.Instance.Level1.activeSelf == true)
+                        {
+                            if (GameManager.Instance.babynum == GameManager.Instance.babynumlength-1) //레벨체크가 초과할시 시작화면보내버림
+                            {
+                                GameManager.Instance.babynum = 0;
+                                SceneManager.LoadScene("1.start");
+                            }
+
+                            else
+                            {
+                                GameManager.Instance.Level1.transform.GetChild(GameManager.Instance.babynum).gameObject.SetActive(false); //현재레벨 꺼버림
+                                GameManager.Instance.Level1.transform.GetChild(GameManager.Instance.babynum + 1).gameObject.SetActive(true); //다음레벨 켜버림
+                                GameManager.Instance.babynum++; //레벨증가
+                                Debug.Log(GameManager.Instance.babynum); //현재레벨
+                            }
+                        }
                     }
                 }
                 break;
