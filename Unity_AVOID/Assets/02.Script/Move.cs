@@ -62,7 +62,7 @@ public class Move : MonoBehaviour
                         Debug.Log("골인!");
                         transform.position = pos;
 
-                        if(GameManager.Instance.Level1.activeSelf == true)
+                        if(GameManager.Instance.Level1.activeSelf == true) //level1일때
                         {
                             if (GameManager.Instance.babynum == GameManager.Instance.babynumlength-1) //레벨체크가 초과할시 시작화면보내버림
                             {
