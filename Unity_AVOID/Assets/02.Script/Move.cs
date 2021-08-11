@@ -32,7 +32,6 @@ public class Move : MonoBehaviour
         Debug.Log("레벨의갯수:" + GameManager.Instance.babynumlength);
         Debug.Log("현재레벨:" + GameManager.Instance.babynum);
     }
-
     private void OnCollisionEnter2D(Collision2D col) //오브젝트 접촉시
     {
         switch(col.gameObject.tag)
@@ -50,7 +49,6 @@ public class Move : MonoBehaviour
                 break;
         }
     }
-
     private void OnTriggerStay2D(Collider2D col2)
     {
         switch(col2.gameObject.tag)
