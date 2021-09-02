@@ -21,7 +21,7 @@ public class Move : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         pos = this.gameObject.transform.position;
         Debug.Log("현재위치:" + pos);
-        GameManager.Instance.babynum = 0; //todo 데이터저장
+        /*GameManager.Instance.babynum = 0; //todo 데이터저장
 
         if(SceneManager.GetActiveScene().name == "2.Game") //level1 난이도일시
         {
@@ -30,7 +30,7 @@ public class Move : MonoBehaviour
         }
 
         Debug.Log("레벨의갯수:" + GameManager.Instance.babynumlength);
-        Debug.Log("현재레벨:" + GameManager.Instance.babynum);
+        Debug.Log("현재레벨:" + GameManager.Instance.babynum);*/
     }
     private void OnCollisionEnter2D(Collision2D col) //오브젝트 접촉시
     {

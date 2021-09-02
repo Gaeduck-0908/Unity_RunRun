@@ -14,6 +14,19 @@ public class GameManager : Singleton<GameManager>
     public GameObject Level3;
     public GameObject Level4;
 
+    private void Start()
+    {
+        GameManager.Instance.babynum = 0; //todo 데이터저장
+
+        if (SceneManager.GetActiveScene().name == "2.Game") //level1 난이도일시
+        {
+            GameManager.Instance.Level1.transform.GetChild(GameManager.Instance.babynum).gameObject.SetActive(true); //현재레벨 장애물 활성화
+            GameManager.Instance.babynumlength = GameManager.Instance.Level1.transform.childCount; //레벨의 갯수 체크
+        }
+
+        Debug.Log("레벨의갯수:" + GameManager.Instance.babynumlength);
+        Debug.Log("현재레벨:" + GameManager.Instance.babynum);
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
