@@ -8,6 +8,7 @@ TagManager:
   - obstacle
   - Charcter
   - Goal
+  - bullet
   layers:
   - Default
   - TransparentFX

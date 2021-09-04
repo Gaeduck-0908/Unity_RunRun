@@ -6,6 +6,8 @@ using Lib;
 
 public class GameManager : Singleton<GameManager>
 {
+
+
     public int babynum;
     public int babynumlength;
 
