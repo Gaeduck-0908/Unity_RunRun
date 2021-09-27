@@ -8,7 +8,6 @@ public class Attack : MonoBehaviour
     public Transform pos; //총알이 발사될 위치
     public float cooltime; //총알 발사 간격
     private float time; //현재 간격
-
     private void Update()
     {
         Vector2 len = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; //마우스의 좌표값을 월드좌표로 환산후 플레이어 위치를 뺌
