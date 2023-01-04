@@ -15,12 +15,17 @@ public class Move : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spr;
 
+    [SerializeField]
+    private Transform attack_start_pos;
+    private Transform save_pos;
+
     private void Start() //가장먼저 실행
     {
         rigid = GetComponent<Rigidbody2D>(); //Rigidbody2d를 불러옴
         spr = GetComponent<SpriteRenderer>();
         pos = this.gameObject.transform.position;
         Debug.Log("현재위치:" + pos);
+        save_pos = attack_start_pos;
     }
     private void OnCollisionEnter2D(Collision2D col) //오브젝트 접촉시
     {
@@ -47,6 +52,7 @@ public class Move : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.W))
                     {
+                        rigid.velocity = Vector3.zero;
                         Debug.Log("골인!");
                         transform.position = pos;
 
@@ -93,6 +99,23 @@ public class Move : MonoBehaviour
                 rigid.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse); //Vector Y+ 방향으로 * 점프강도,순간적으로 한번에 줌
                 isGround = false; //땅에서 떨어짐
             }
+        }
+
+        MouseCheck();
+    }
+
+    void MouseCheck()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dirVec = mousePos - (Vector2)transform.position;
+
+        if (dirVec.x < 0)
+        {
+            spr.flipX = true;
+        }
+        else
+        {
+            spr.flipX = false;
         }
     }
 }
